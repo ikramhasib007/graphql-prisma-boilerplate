@@ -2,6 +2,7 @@ import prisma from '../src/prisma';
 import seedDatabase, { userOne } from './utils/seedDatabase';
 import getClient from './utils/getClient';
 import { createUser, login, getUsers, getProfile } from './utils/operations';
+import faker from 'faker';
 
 const client = getClient()
 
@@ -10,9 +11,9 @@ beforeEach(seedDatabase)
 test('Should create a new user', async () => {
   const variables = {
     data: {
-      name: 'Ikram Hasib',
-      email: 'ikramhasib008@gmail.com',
-      password: 'Nopass123'
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: faker.random.alphaNumeric(8)
     }
   }
   
@@ -27,14 +28,13 @@ test('Should expose public author profiles', async () => {
   const response = await client.query({ query: getUsers })
   expect(response.data.users.length).toBe(2);
   expect(response.data.users[0].email).toBe(null);
-  expect(response.data.users[0].name).toBe('john doe')
 })
 
 test('Should not login with bad credentials', async () => {
   const variables = {
     data: {
-      email: 'ikahsfd@gmail.com',
-      password: 'ewrewru098^'
+      email: faker.name.findName(),
+      password: faker.random.alphaNumeric(6)
     }
   }
 
@@ -46,9 +46,9 @@ test('Should not login with bad credentials', async () => {
 test('Should not signup with invalid password', async () => {
   const variables = {
     data: {
-      name: 'ikram',
-      email: 'ikramhasib007@gmail.com',
-      password: 'Noss12'
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: faker.random.alphaNumeric(4)
     }
   }
   await expect(

@@ -1,12 +1,13 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import prisma from '../../src/prisma'
+import faker from 'faker'
 
 export const userOne = {
   input: {
-    name: 'john doe',
-    email: 'johndoe@example.com',
-    password: bcrypt.hashSync('Red089!#$', 10)
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    password: bcrypt.hashSync(faker.random.alphaNumeric(), 10)
   },
   user: undefined,
   token: undefined
@@ -14,9 +15,9 @@ export const userOne = {
 
 export const userTwo = {
   input: {
-    name: 'Jane',
-    email: 'jane@example.com',
-    password: bcrypt.hashSync('Blue089!#$', 10)
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    password: bcrypt.hashSync(faker.random.alphaNumeric(8), 10)
   },
   user: undefined,
   token: undefined

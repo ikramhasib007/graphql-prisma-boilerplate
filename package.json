@@ -8,8 +8,9 @@
     "migrate-dev": "env-cmd -f ./config/dev.env prisma migrate dev --preview-feature",
     "migrate-reset": "env-cmd -f ./config/dev.env prisma migrate reset --preview-feature",
     "migrate-resolve": "env-cmd -f ./config/dev.env prisma migrate resolve --preview-feature",
-    "migrate-reset-test": "env-cmd -f ./config/test.env prisma migrate reset --preview-feature",
-    "test": "env-cmd -f ./config/test.env jest --watchAll --detectOpenHandles --runInBand --testTimeout=12000"
+    "test": "env-cmd -f ./config/test.env jest --watchAll --detectOpenHandles --runInBand --testTimeout=12000",
+    "migrate-test": "env-cmd -f ./config/test.env prisma migrate dev --preview-feature",
+    "migrate-reset-test": "env-cmd -f ./config/test.env prisma migrate reset --preview-feature"
   },
   "jest": {
     "globalSetup": "./tests/jest/globalSetup.js",
